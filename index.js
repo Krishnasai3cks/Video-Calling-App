@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-
 const port = 4000;
 
 const http = require("http");
@@ -10,10 +9,10 @@ const io = require("socket.io")(server);
 app.use(express.static(__dirname + "/public"));
 
 app.get("/broadcast", (req, res) => {
-    res.redirect("broadcast.html");
+    res.sendFile("./public/broadcast.html", { root: __dirname });
 });
 app.route("/").get((req, res) => {
-    res.redirect("index.html");
+    res.sendFile("./public/index.html", { root: __dirname });
 });
 io.sockets.on("error", (e) => console.log(e));
 server.listen(port, () => console.log(`Server is running on port ${port}`));
